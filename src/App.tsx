@@ -1,13 +1,24 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import GlobalStyles from './styles/GlobalStyles'
+import Home from './pages/Home'
+import AppLayout from './ui/AppLayout'
+import Trip from './pages/Trip'
+
 function App() {
   return (
-    <div>
-      <h1>HELLO WORLD!</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore ut
-        reiciendis voluptates ipsam est in temporibus ad, quis, ducimus maxime
-        sunt natus numquam quam nam sequi voluptas. Maiores, corporis molestias.
-      </p>
-    </div>
+    <>
+      <GlobalStyles />
+
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Home />} />
+            <Route path="travel-list" element={<Trip />} />
+            <Route path="*" element={<div>Not Found</div>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
 
