@@ -1,7 +1,15 @@
-import FormRegister from '../features/register/FormRegister'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+import { getToken } from '../features/auth/authSlice'
+
+import FormRegister from '../features/auth/FormRegister'
 import Logo from '../ui/Logo'
 
 export default function Login() {
+  const isLogin = useSelector(getToken)
+
+  if (isLogin) return <Navigate to="/dashboard" />
+
   return (
     <section className="h-[80vh] m-auto flex flex-col items-center justify-center">
       <div className="bg-primary-900 p-10">
