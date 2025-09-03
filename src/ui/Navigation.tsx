@@ -1,6 +1,11 @@
+import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
+import { getToken, getUser } from '../features/auth/authSlice'
 
 function Navigation() {
+  const isLogin = useSelector(getToken)
+  const user = useSelector(getUser)
+
   const location = useLocation()
   const hideOnDashboard = location.pathname.startsWith('/dashboard')
 
@@ -35,37 +40,44 @@ function Navigation() {
                 Find Trip
               </Link>
             </li>
-            <li>
-              <Link
-                to="/login"
-                className={
-                  location.pathname === '/login'
-                    ? 'text-accent-400 transition-colors'
-                    : 'text-primary-100'
-                }
-              >
-                Sign In
-              </Link>
-            </li>
+            {!isLogin && (
+              <li>
+                <Link
+                  to="/login"
+                  className={
+                    location.pathname === '/login'
+                      ? 'text-accent-400 transition-colors'
+                      : 'text-primary-100'
+                  }
+                >
+                  Sign In
+                </Link>
+              </li>
+            )}
           </>
         )}
 
-        <li>
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <span
-              className={
-                !hideOnDashboard ? 'text-primary-100' : 'text-accent-400'
-              }
+        {isLogin && (
+          <li>
+            <Link
+              to="/dashboard"
+              className="flex items-center gap-2 capitalize"
             >
-              neutron123
-            </span>
-            <img
-              src="https://i.pravatar.cc/300"
-              alt="avatar"
-              className="w-10 h-10 rounded-full"
-            />
-          </Link>
-        </li>
+              <span
+                className={
+                  !hideOnDashboard ? 'text-primary-100' : 'text-accent-400'
+                }
+              >
+                {user?.username}
+              </span>
+              <img
+                src="https://i.pravatar.cc/300"
+                alt="avatar"
+                className="w-10 h-10 rounded-full"
+              />
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   )
