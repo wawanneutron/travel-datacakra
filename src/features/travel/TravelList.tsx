@@ -1,61 +1,52 @@
 import { useNavigate } from 'react-router-dom'
+import { useTripArticles } from '../../hooks/useTripArticles'
+import type { TravelItem } from '../../types/travel'
+import Spinner from '../../ui/Spinner'
 import CardTravel from './CardTravel'
+import { FaArrowDown } from 'react-icons/fa6'
 
 function TravelList() {
-  const travelData = [
-    {
-      id: 1,
-      title: 'Pantai Kuta',
-      description: 'Pantai ikonik di Bali dengan pasir putih dan sunset indah.',
-      cover_image_url:
-        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
-      createdAt: '2025-05-10T08:30:00.000Z'
-    },
-    {
-      id: 2,
-      title: 'Gunung Bromo',
-      description:
-        'Gunung berapi aktif dengan pemandangan sunrise yang memukau.',
-      cover_image_url:
-        'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
-      createdAt: '2025-05-12T06:15:00.000Z'
-    },
-    {
-      id: 3,
-      title: 'Danau Toba',
-      description:
-        'Danau vulkanik terbesar di Asia Tenggara, dengan Pulau Samosir di tengahnya.',
-      cover_image_url:
-        'https://images.unsplash.com/photo-1589308078055-9153a28b8b34',
-      createdAt: '2025-05-14T14:45:00.000Z'
-    },
-    {
-      id: 4,
-      title: 'Raja Ampat',
-      description:
-        'Surga bawah laut dengan terumbu karang dan biota laut beragam.',
-      cover_image_url:
-        'https://images.unsplash.com/photo-1526481280698-8fcc6b903a20',
-      createdAt: '2025-05-15T10:20:00.000Z'
-    },
-    {
-      id: 5,
-      title: 'Candi Borobudur',
-      description: 'Candi Buddha terbesar di dunia dengan relief yang megah.',
-      cover_image_url:
-        'https://images.unsplash.com/photo-1602067340370-3f03b0c803e4',
-      createdAt: '2025-05-16T09:00:00.000Z'
-    }
-  ]
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useTripArticles()
 
   const navigate = useNavigate()
   const onDetailTrip = () => navigate('/login')
 
+  if (isLoading) return <Spinner />
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {travelData.map((travel) => (
-        <CardTravel key={travel.id} trip={travel} detailTrip={onDetailTrip} />
-      ))}
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {data?.pages.map((page) =>
+          page.items.map((travel: TravelItem) => (
+            <CardTravel
+              key={travel.id}
+              trip={travel}
+              detailTrip={onDetailTrip}
+            />
+          ))
+        )}
+      </div>
+
+      <div className="flex justify-center items-center">
+        {hasNextPage && !isFetchingNextPage && (
+          <button
+            onClick={() => fetchNextPage()}
+            className="flex items-center font-mono text-lg gap-2 my-10 px-8 py-4 bg-primary-800 text-accent-300"
+          >
+            <span>Load More</span>
+            <FaArrowDown />
+          </button>
+        )}
+
+        {isFetchingNextPage && <Spinner />}
+
+        {!hasNextPage && (
+          <p className="text-lg py-6 text-center text-accent-500">
+            No more data trip...
+          </p>
+        )}
+      </div>
     </div>
   )
 }

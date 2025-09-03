@@ -15,8 +15,13 @@ function CardTravel({ trip, detailTrip }: CardTravelProps) {
       <div className="p-2">
         <img
           src={trip.cover_image_url}
+          title={trip.title}
           alt={trip.title}
+          loading="lazy"
           className="w-full h-48 object-cover rounded-lg mb-4"
+          onError={(e) =>
+            ((e.currentTarget as HTMLImageElement).src = '/broken-image.png')
+          }
         />
         <h2> {trip.title} </h2>
         <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
