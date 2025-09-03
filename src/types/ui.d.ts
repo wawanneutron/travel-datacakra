@@ -1,7 +1,5 @@
-type ButtonSize = 'small' | 'medium' | 'large'
-type ButtonVariation = 'primary' | 'secondary' | 'danger'
+import type { ChildrenProps } from '.'
 
-export interface ButtonProps {
-  size?: ButtonSize
-  variation?: ButtonVariation
+export interface ButtonProps extends ChildrenProps {
+  disabled?: boolean
 }
