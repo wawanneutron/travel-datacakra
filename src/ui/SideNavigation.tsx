@@ -1,7 +1,10 @@
 import { FaCaretSquareRight, FaHome, FaSignOutAlt } from 'react-icons/fa'
 import { FaHeartCircleCheck } from 'react-icons/fa6'
+import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
+import { logout } from '../features/auth/authSlice'
 import Logo from './Logo'
+import toast from 'react-hot-toast'
 
 function SideNavigation() {
   const navLinks = [
@@ -22,7 +25,13 @@ function SideNavigation() {
     }
   ]
 
+  const dispatch = useDispatch()
   const location = useLocation()
+
+  const handleLogout = () => {
+    dispatch(logout())
+    toast.success('Logout successful')
+  }
 
   return (
     <nav className="border-r border-primary-900">
@@ -45,7 +54,10 @@ function SideNavigation() {
         ))}
 
         <li className="mt-auto">
-          <button className="py-3 px-5 w-full hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200">
+          <button
+            onClick={handleLogout}
+            className="py-3 px-5 w-full hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200"
+          >
             <FaSignOutAlt className="h-5 w-5 text-primary-600" />
             <span>Sign Out</span>
           </button>
