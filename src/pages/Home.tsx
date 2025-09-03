@@ -1,18 +1,26 @@
-function Home() {
-  return (
-    <section>
-      <h1>HELLO WORLD!</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore ut
-        reiciendis voluptates ipsam est in temporibus ad, quis, ducimus maxime
-        sunt natus numquam quam nam sequi voluptas. Maiores, corporis molestias.
-      </p>
+import { Link } from 'react-router-dom'
+import bg from '../../public/bg.png'
 
-      <p style={{ marginTop: '100px', background: 'salmon', padding: '10px' }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero, nihil?
-      </p>
-    </section>
+export default function Home() {
+  return (
+    <main>
+      <img
+        src={bg}
+        alt="bg-travel"
+        className="absolute h-full w-full -mt-24 object-cover object-top"
+      />
+
+      <div className="flex flex-col items-center justify-center relative z-10 text-center h-[80vh]">
+        <h1 className="font-mono text-8xl capitalize text-primary-50 mb-10 tracking-tight font-normal">
+          Explore <br /> the beautiful place.
+        </h1>
+        <Link
+          to="/travel-list"
+          className="bg-accent-500 px-8 py-6 text-primary-800 text-lg font-semibold hover:bg-accent-600 transition-all"
+        >
+          Find Your Next Adventure
+        </Link>
+      </div>
+    </main>
   )
 }
-
-export default Home
