@@ -1,10 +1,16 @@
-function Login() {
+import FormLogin from '../features/login/FormLogin'
+import Logo from '../ui/Logo'
+
+export default function Login() {
   return (
-    <section>
-      <h1>Login Page</h1>
-      <p>this is login page</p>
+    <section className="h-[80vh] m-auto flex flex-col items-center justify-center">
+      <div className="bg-primary-900 p-10">
+        <div className="flex flex-col items-center gap-2 mb-4  border-b py-4 border-primary-800">
+          <Logo label={false} />
+          <h3 className="font-mono text-3xl">Sign In</h3>
+        </div>
+        <FormLogin />
+      </div>
     </section>
   )
 }
-
-export default Login
