@@ -1,24 +1,19 @@
-import { Outlet } from 'react-router-dom'
-import styled from 'styled-components'
-import Navbar from './Navbar'
-
-const StyledAppLayout = styled.div`
-  position: relative;
-  min-height: 100vh;
-`
-
-const Main = styled.main`
-  background-color: var(--color-grey-50);
-`
+import { Outlet, useLocation } from 'react-router-dom'
+import Header from './Header'
 
 function AppLayout() {
+  const location = useLocation()
+  const isHome = location.pathname === '/'
+
   return (
-    <StyledAppLayout>
-      <Navbar />
-      <Main>
-        <Outlet />
-      </Main>
-    </StyledAppLayout>
+    <div className="bg-primary-950 text-primary-100 min-h-screen flex flex-col relative">
+      <div>
+        <Header />
+        <main className={`flex-1 ${!isHome ? 'px-24' : ''}`}>
+          <Outlet />
+        </main>
+      </div>
+    </div>
   )
 }
 
