@@ -5,9 +5,9 @@ This app allows users to **register & login**, manage **travel articles & catego
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
-👉 [Deployment Link](https://your-demo-link.netlify.app)
+<!--  [Deployment Link](https://your-demo-link.netlify.app) -->
 
 ---
 
@@ -49,16 +49,16 @@ yarn dev
 
 ## ✅ Features Implemented
 
-- 👤 **Authentication** (Register & Login) with JWT
-- 🔒 **Protected routes** using `ProtectedRoute`
-- 📦 **State management** with Redux Toolkit (`authSlice`)
-- 📡 **Data fetching & caching** with `@tanstack/react-query`
-- 📚 **Travel articles CRUD** (Create, Read, Update, Delete)
-- 🗂️ **Category management** with modal selection
-- 📑 **Pagination** (with custom `Pagination` component)
-- 📸 **Image upload** via Strapi `/upload` endpoint (with preview + drag & drop support)
-- 🧾 **Reusable hooks** (`useTripArticles`, `useSaveArticle`, `useDeleteArticle`, etc.)
-- 🖼️ **Responsive UI** styled with Tailwind CSS
+- **Authentication** (Register & Login) with JWT
+- **Protected routes** using `ProtectedRoute`
+- **State management** with Redux Toolkit (`authSlice`)
+- **Data fetching & caching** with `@tanstack/react-query`
+- **Travel articles CRUD** (Create, Read, Update, Delete)
+- **Category management** with modal selection
+- **Pagination** (with custom `Pagination` component)
+- **Image upload** via Strapi `/upload` endpoint (with preview + drag & drop support)
+- **Reusable hooks** (`useTripArticles`, `useSaveArticle`, `useDeleteArticle`, etc.)
+- **Responsive UI** styled with Tailwind CSS
 
 ---
 
