@@ -25,21 +25,22 @@ function Navigation() {
           </Link>
         </li>
 
+        <li>
+          <Link
+            to="/travel-list"
+            className={
+              location.pathname === '/travel-list'
+                ? 'text-accent-400 transition-colors'
+                : 'text-primary-100'
+            }
+          >
+            Find Trip
+          </Link>
+        </li>
+
         {/* valiadation menu */}
         {!hideOnDashboard && (
           <>
-            <li>
-              <Link
-                to="/travel-list"
-                className={
-                  location.pathname === '/travel-list'
-                    ? 'text-accent-400 transition-colors'
-                    : 'text-primary-100'
-                }
-              >
-                Find Trip
-              </Link>
-            </li>
             {!isLogin && (
               <li>
                 <Link
@@ -61,7 +62,7 @@ function Navigation() {
           <li>
             <Link
               to="/dashboard"
-              className="flex items-center gap-2 capitalize"
+              className="flex items-center gap-4 capitalize"
             >
               <span
                 className={
