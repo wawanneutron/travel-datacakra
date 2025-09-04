@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useTripArticles } from '../../hooks/useTripArticles'
+import { useLoadMoreTrip } from '../../hooks/useTripArticles'
 import type { TravelItem } from '../../types/travel'
 import Spinner from '../../ui/Spinner'
 import CardTravel from './CardTravel'
@@ -7,7 +7,7 @@ import { FaArrowDown } from 'react-icons/fa6'
 
 function TravelList() {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useTripArticles()
+    useLoadMoreTrip()
 
   const navigate = useNavigate()
   const onDetailTrip = () => navigate('/login')
