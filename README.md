@@ -1,69 +1,82 @@
-# React + TypeScript + Vite
+# ✈️ Travel Articles
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern travel article management web app built with **React (Vite)**, **Tailwind CSS**, **Redux Toolkit**, and **@tanstack/react-query**, connected to a **Strapi API**.  
+This app allows users to **register & login**, manage **travel articles & categories**, and explore data with **pagination, modals, and image uploads**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+👉 [Deployment Link](https://your-demo-link.netlify.app)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ⚒️ Setup Instructions
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. **Clone the repository:**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/your-username/travel-articles-app.git
+cd travel-articles-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Install dependencies:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. **Set environment variables**  
+   Create a `.env` file in the root folder:
+
+```env
+VITE_API_URL=https://extra-brooke-yeremiadio-46b2183e.koyeb.app/api
+```
+
+4. **Run development server:**
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+5. Open `http://localhost:5173` in your browser.
+
+---
+
+## ✅ Features Implemented
+
+- 👤 **Authentication** (Register & Login) with JWT
+- 🔒 **Protected routes** using `ProtectedRoute`
+- 📦 **State management** with Redux Toolkit (`authSlice`)
+- 📡 **Data fetching & caching** with `@tanstack/react-query`
+- 📚 **Travel articles CRUD** (Create, Read, Update, Delete)
+- 🗂️ **Category management** with modal selection
+- 📑 **Pagination** (with custom `Pagination` component)
+- 📸 **Image upload** via Strapi `/upload` endpoint (with preview + drag & drop support)
+- 🧾 **Reusable hooks** (`useTripArticles`, `useSaveArticle`, `useDeleteArticle`, etc.)
+- 🖼️ **Responsive UI** styled with Tailwind CSS
+
+---
+
+## 💡 Technical Decisions
+
+- **React + Vite** chosen for fast dev environment and modern DX.
+- **Tailwind CSS** for utility-first, responsive styling.
+- **Redux Toolkit** for authentication state persistence (`loadFromStorage`, `setAuth`, `logout`).
+- **React Query** for managing server state (fetch, cache, invalidate queries).
+- **Strapi API** as backend (articles, categories, auth, upload).
+- **Reusable hooks** for data fetching and mutations → makes components clean and focused.
+- **Modal-based CRUD** UI pattern for Articles and Categories.
+- **Custom Pagination component** for page navigation with condensed page numbers (`...` style).
+
+---
+
+## 📬 Contact
+
+- 📧 Email: hellowawansetiawan@gmail.com
+- 💬 WhatsApp: +62 877-3269-7337
+- 💼 LinkedIn: [linkedin.com/in/wawan-setiawan](https://www.linkedin.com/in/wawan-setiawan-84934a206/)
