@@ -1,6 +1,7 @@
 export interface TravelItem {
   id: number
   title: string
+  documentId: string
   description: string
   cover_image_url: string
   createdAt: string
@@ -18,4 +19,11 @@ export interface TravelResponse {
   meta: {
     pagination: ApiPagination
   }
+}
+
+export interface ArticleFormPayload {
+  title: string
+  description: string
+  category: string
+  cover_image_url: string
 }
