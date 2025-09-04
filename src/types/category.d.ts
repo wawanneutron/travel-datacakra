@@ -15,3 +15,7 @@ export interface CategoryResponse {
     pagination: ApiPagination
   }
 }
+
+export interface CategoryFormPayload {
+  name: string
+}
