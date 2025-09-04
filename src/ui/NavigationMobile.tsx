@@ -21,7 +21,6 @@ function NavigationMobile() {
 
   return (
     <div className="md:hidden">
-      {/* tombol hamburger */}
       <button
         onClick={toggleMenu}
         className="text-primary-100 focus:outline-none z-50 relative"
