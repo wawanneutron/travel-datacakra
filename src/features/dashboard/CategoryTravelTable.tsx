@@ -95,7 +95,7 @@ function CategoryTravelTable({ hidden, itemCategory }: CategoryTableProps) {
                 </td>
                 {hidden && (
                   <td className="px-4 py-3 border border-primary-700 max-w-[120px]">
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex flex-wrap items-center justify-center gap-2">
                       <button
                         onClick={() => {
                           handleOpenModal(category)
