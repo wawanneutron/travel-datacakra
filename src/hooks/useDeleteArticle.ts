@@ -8,7 +8,7 @@ export function useDeleteArticle() {
   const token = useSelector(getToken)
   const queryClient = useQueryClient()
 
-  const { mutate: removeArticle, isPending: isDele } = useMutation({
+  const { mutate: removeArticle, isPending: isDeleArticle } = useMutation({
     mutationFn: (id: string) => deleteArticle(id, token!),
     onSuccess: () => {
       toast.success('Article deleted successfully')
@@ -20,5 +20,5 @@ export function useDeleteArticle() {
     }
   })
 
-  return { removeArticle, isDele }
+  return { removeArticle, isDeleArticle }
 }
