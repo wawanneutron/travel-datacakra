@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { getToken, getUser } from '../features/auth/authSlice'
+import NavigationMobile from './NavigationMobile'
 
 function Navigation() {
   const isLogin = useSelector(getToken)
@@ -10,8 +11,8 @@ function Navigation() {
   const hideOnDashboard = location.pathname.startsWith('/dashboard')
 
   return (
-    <nav className="z-10 text-xl">
-      <ul className="flex gap-16 items-center">
+    <nav className="z-20 text-xl">
+      <ul className="hidden md:flex gap-16 items-center text-xl">
         <li>
           <Link
             to="/"
@@ -80,6 +81,8 @@ function Navigation() {
           </li>
         )}
       </ul>
+
+      <NavigationMobile />
     </nav>
   )
 }

@@ -9,7 +9,7 @@ function AppLayout() {
     <div className="bg-primary-950 text-primary-100 min-h-screen flex flex-col relative">
       <div>
         <Header />
-        <main className={`flex-1 ${!isHome ? 'px-24' : ''}`}>
+        <main className={`flex-1 ${!isHome ? 'px-6 md:px-24' : ''}`}>
           <Outlet />
         </main>
       </div>
