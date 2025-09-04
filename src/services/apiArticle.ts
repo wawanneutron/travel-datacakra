@@ -1,5 +1,9 @@
 import type { PaginatedResult } from '../types'
-import type { TravelItem, TravelResponse } from '../types/travel'
+import type {
+  ArticleFormPayload,
+  TravelItem,
+  TravelResponse
+} from '../types/travel'
 
 const BASE_API = import.meta.env.VITE_API_URL
 
@@ -20,4 +24,49 @@ export const getTripArticles = async (
     totalPages: meta.pagination.pageCount,
     totalItems: meta.pagination.total
   }
+}
+
+export const createUpdateArticle = async (
+  payload: ArticleFormPayload,
+  token: string,
+  id?: string
+): Promise<TravelItem> => {
+  const method = id ? 'PUT' : 'POST'
+  const url = id ? `${BASE_API}/articles/${id}` : `${BASE_API}/articles`
+
+  const res = await fetch(url, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ data: payload })
+  })
+
+  const json = await res.json()
+
+  if (!res.ok)
+    throw new Error(
+      `Failed to ${id ? 'update' : 'create'} article: ${json?.error?.message}`
+    )
+
+  return json
+}
+
+export const deleteArticle = async (id: string, token: string) => {
+  const res = await fetch(`${BASE_API}/articles/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  const text = await res.text()
+  const json = text ? JSON.parse(text) : null
+
+  if (!res.ok) {
+    throw new Error(json?.error?.message || 'Failed to delete article')
+  }
+
+  return json
 }

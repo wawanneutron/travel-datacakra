@@ -5,19 +5,41 @@ import Pagination from '../../ui/Pagination'
 import Spinner from '../../ui/Spinner'
 import Button from '../../ui/Button'
 import { FaPlus } from 'react-icons/fa6'
+import ModalArticle from './ModalArticle'
+import type { TravelItem } from '../../types/travel'
+import type { PurposeType } from '../../types/ui'
+import ModalDelete from './ModalDelete'
 
 function ArticleTravelTable() {
   const [page, setPage] = useState(1)
   const { articles, isLoading } = useTripArticles(page, 8)
 
-  console.log('articless: ', articles)
+  const [purpose, setPurpose] = useState<PurposeType>()
+  const [isModalArticle, setIsModalArticle] = useState<boolean>(false)
+  const [isModalDelete, setIsModalDelete] = useState<boolean>(false)
+  const [articleItem, setArticleItem] = useState<TravelItem>()
+
+  const handleModalArticle = (item?: TravelItem) => {
+    setArticleItem(item)
+    setIsModalArticle(true)
+  }
+
+  const handleModalDelete = (item: TravelItem) => {
+    setArticleItem(item)
+    setIsModalDelete(true)
+  }
 
   if (isLoading) return <Spinner />
 
   return (
     <div className="mt-4">
       <div className="inline-block">
-        <Button>
+        <Button
+          onClick={() => {
+            handleModalArticle()
+            setPurpose('create')
+          }}
+        >
           <FaPlus />
           <span>Add Article</span>
         </Button>
@@ -58,11 +80,20 @@ function ArticleTravelTable() {
                 </td>
                 <td className="px-4 py-3 border border-primary-700 max-w-[120px]">
                   <div className="flex items-center justify-center gap-2">
-                    <button className="flex items-center gap-2 h-10 p-2 border border-accent-700">
+                    <button
+                      onClick={() => {
+                        handleModalArticle(travel)
+                        setPurpose('edit')
+                      }}
+                      className="flex items-center gap-2 h-10 p-2 border border-accent-700"
+                    >
                       <HiPencil />
                       <span>Edit</span>
                     </button>
-                    <button className="flex items-center gap-2 h-10 p-2 border border-accent-700">
+                    <button
+                      onClick={() => handleModalDelete(travel)}
+                      className="flex items-center gap-2 h-10 p-2 border border-accent-700"
+                    >
                       <HiTrash />
                       <span>Delete</span>
                     </button>
@@ -74,11 +105,24 @@ function ArticleTravelTable() {
         </table>
       </div>
 
-      {/* Pagination */}
       <Pagination
         currentPage={articles?.page || 1}
         totalPages={articles?.totalPages || 1}
         onPageChange={(newPage) => setPage(newPage)}
+      />
+
+      <ModalArticle
+        purpose={purpose}
+        item={articleItem}
+        isOpen={isModalArticle}
+        onCloseModal={() => setIsModalArticle(false)}
+      />
+
+      <ModalDelete
+        isOpen={isModalDelete}
+        TypeDelete="article"
+        documentId={articleItem?.documentId}
+        onCloseModal={() => setIsModalDelete(false)}
       />
     </div>
   )
