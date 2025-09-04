@@ -1,10 +1,9 @@
+import { useState } from 'react'
 import { FaCaretSquareRight, FaHome, FaSignOutAlt } from 'react-icons/fa'
 import { FaHeartCircleCheck } from 'react-icons/fa6'
-import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { logout } from '../features/auth/authSlice'
+import ModalLogout from '../features/auth/ModalLogout'
 import Logo from './Logo'
-import toast from 'react-hot-toast'
 
 function SideNavigation() {
   const navLinks = [
@@ -25,13 +24,11 @@ function SideNavigation() {
     }
   ]
 
-  const dispatch = useDispatch()
   const location = useLocation()
 
-  const handleLogout = () => {
-    dispatch(logout())
-    toast.success('Logout successful')
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleLogout = () => setIsModalOpen(true)
 
   return (
     <nav className="border-r border-primary-900">
@@ -63,6 +60,11 @@ function SideNavigation() {
           </button>
         </li>
       </ul>
+
+      <ModalLogout
+        isOpen={isModalOpen}
+        onCloseModal={() => setIsModalOpen(false)}
+      />
     </nav>
   )
 }
