@@ -34,7 +34,7 @@ function Navigation() {
                 : 'text-primary-100'
             }
           >
-            Find Trip
+            Article
           </Link>
         </li>
 
