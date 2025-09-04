@@ -5,7 +5,7 @@ export default function DashboardHome() {
   const user = useSelector(getUser)
 
   return (
-    <div className="py-2">
+    <div className="py-2 px-8">
       <div className="border-b border-primary-800 pb-2">
         <h1 className="text-2xl font-bold mb-2">Dashboard</h1>
         <p>
