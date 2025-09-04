@@ -1,9 +1,9 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { getTripArticles } from '../services/apiArticle'
 import type { TravelItem } from '../types/travel'
 import type { PaginatedResult } from '../types'
 
-export function useTripArticles() {
+export function useLoadMoreTrip() {
   return useInfiniteQuery<PaginatedResult<TravelItem>>({
     queryKey: ['tripArticles'],
     queryFn: ({ pageParam = 1 }) => getTripArticles(pageParam as number, 8),
@@ -18,4 +18,23 @@ export function useTripArticles() {
       return lastPage.page + 1
     }
   })
+}
+
+export function useTripArticles(page: number, pageSize = 8) {
+  const {
+    data: articles,
+    isPending: isLoading,
+    isFetched,
+    error
+  } = useQuery<PaginatedResult<TravelItem>>({
+    queryKey: ['tripArticles', page],
+    queryFn: () => getTripArticles(page, pageSize)
+  })
+
+  return {
+    articles,
+    isLoading,
+    isFetched,
+    error
+  }
 }

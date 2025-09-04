@@ -1,8 +1,14 @@
+import ArticleTravelTable from '../../features/dashboard/ArticleTravelTable'
+
 export default function DashboardArticle() {
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Article Management</h1>
-      <p>Here you can manage your articles.</p>
+    <div className="py-2">
+      <div className="border-b border-primary-800 pb-2">
+        <h1 className="text-2xl font-bold mb-2">Article Travel Management</h1>
+        <p>Here you can manage your articles.</p>
+      </div>
+
+      <ArticleTravelTable />
     </div>
   )
 }
