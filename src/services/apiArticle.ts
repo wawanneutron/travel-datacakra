@@ -12,7 +12,8 @@ export const getTripArticles = async (
   pageSize = 8
 ): Promise<PaginatedResult<TravelItem>> => {
   const res = await fetch(
-    `${BASE_API}/articles?pagination[page]=${page}&pagination[pageSize]=${pageSize}`
+    `${BASE_API}/articles?pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+    { method: 'GET' }
   )
   if (!res.ok) throw new Error('Failed to fetch trip articles')
 
@@ -69,4 +70,22 @@ export const deleteArticle = async (id: string, token: string) => {
   }
 
   return json
+}
+
+export const getArticle = async (id: string, token: string) => {
+  const res = await fetch(`${BASE_API}/articles/${id}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  const text = await res.text()
+  const json = text ? JSON.parse(text) : null
+
+  if (!res.ok) {
+    throw new Error(json?.error?.message || 'Failed to fetch detail article')
+  }
+
+  return json.data
 }

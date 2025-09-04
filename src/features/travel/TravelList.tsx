@@ -10,7 +10,7 @@ function TravelList() {
     useLoadMoreTrip()
 
   const navigate = useNavigate()
-  const onDetailTrip = () => navigate('/login')
+  const onDetailTrip = (id: string) => navigate(`/travel-list/${id}`)
 
   if (isLoading) return <Spinner />
 
@@ -22,7 +22,7 @@ function TravelList() {
             <CardTravel
               key={travel.id}
               trip={travel}
-              detailTrip={onDetailTrip}
+              detailTrip={() => onDetailTrip(travel.documentId)}
             />
           ))
         )}

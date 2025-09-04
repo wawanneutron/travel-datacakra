@@ -13,6 +13,7 @@ import DashboardHome from './pages/dashboard/Home'
 import AppLayout from './ui/AppLayout'
 import AppLayoutDashboard from './ui/AppLayoutDashboard'
 import ProtectedRoute from './features/auth/ProtectedRoute'
+import Detail from './pages/Detail'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +34,7 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Home />} />
             <Route path="travel-list" element={<Travel />} />
+            <Route path="travel-list/:detailId" element={<Detail />} />
 
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
