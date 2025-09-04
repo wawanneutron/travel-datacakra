@@ -7,7 +7,7 @@ This app allows users to **register & login**, manage **travel articles & catego
 
 ## Live Demo
 
-<!--  [Deployment Link](https://your-demo-link.netlify.app) -->
+[Deployment Link](https://lalajoyuk.netlify.app)
 
 ---
 
