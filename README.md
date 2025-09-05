@@ -17,7 +17,7 @@ This app allows users to **register & login**, manage **travel articles & catego
 
 ```bash
 git clone https://github.com/wawanneutron/travel-datacakra
-cd travel-articles-app
+cd travel-datacakra
 ```
 
 2. **Install dependencies:**
@@ -59,6 +59,8 @@ yarn dev
 - **Image upload** via Strapi `/upload` endpoint (with preview + drag & drop support)
 - **Reusable hooks** (`useTripArticles`, `useSaveArticle`, `useDeleteArticle`, etc.)
 - **Responsive UI** styled with Tailwind CSS
+- **List Card Article**
+- **Detail Article**
 
 ---
 
