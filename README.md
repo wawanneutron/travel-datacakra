@@ -16,7 +16,7 @@ This app allows users to **register & login**, manage **travel articles & catego
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/travel-articles-app.git
+git clone https://github.com/wawanneutron/travel-datacakra
 cd travel-articles-app
 ```
 
