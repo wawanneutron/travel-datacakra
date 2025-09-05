@@ -6,6 +6,7 @@ import CardTravel from './CardTravel'
 import { FaArrowDown } from 'react-icons/fa6'
 import { useSelector } from 'react-redux'
 import { getToken } from '../auth/authSlice'
+import toast from 'react-hot-toast'
 
 function TravelList() {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
@@ -14,8 +15,12 @@ function TravelList() {
   const token = useSelector(getToken)
 
   const navigate = useNavigate()
-  const onDetailTrip = (id: string) =>
-    token ? navigate(`/travel-list/${id}`) : navigate('/login')
+  const onDetailTrip = (id: string) => {
+    if (token) return navigate(`/travel-list/${id}`)
+
+    navigate('/login')
+    toast.error('You must be logged in to view article detail')
+  }
 
   if (isLoading) return <Spinner />
 
