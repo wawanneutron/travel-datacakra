@@ -4,13 +4,18 @@ import type { TravelItem } from '../../types/travel'
 import Spinner from '../../ui/Spinner'
 import CardTravel from './CardTravel'
 import { FaArrowDown } from 'react-icons/fa6'
+import { useSelector } from 'react-redux'
+import { getToken } from '../auth/authSlice'
 
 function TravelList() {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useLoadMoreTrip()
 
+  const token = useSelector(getToken)
+
   const navigate = useNavigate()
-  const onDetailTrip = (id: string) => navigate(`/travel-list/${id}`)
+  const onDetailTrip = (id: string) =>
+    token ? navigate(`/travel-list/${id}`) : navigate('/login')
 
   if (isLoading) return <Spinner />
 
