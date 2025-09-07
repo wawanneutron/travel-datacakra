@@ -20,7 +20,7 @@ export function useLoadMoreTrip() {
   })
 }
 
-export function useTripArticles(page: number, pageSize = 8) {
+export function useTripArticles(page?: number, pageSize = 8) {
   const {
     data: articles,
     isPending: isLoading,

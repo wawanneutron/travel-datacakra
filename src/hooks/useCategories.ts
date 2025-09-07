@@ -3,7 +3,7 @@ import { getCategories } from '../services/apiCategoriy'
 import type { PaginatedResult } from '../types'
 import type { CategoryItem } from '../types/category'
 
-export function useCategories(page: number, pageSize = 8) {
+export function useCategories(page?: number, pageSize = 8) {
   const {
     data: categories,
     isPending: isLoading,
