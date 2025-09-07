@@ -1,12 +1,15 @@
 import { useCategories } from '../../hooks/useCategories'
 import { useTripArticles } from '../../hooks/useTripArticles'
+import Spinner from '../../ui/Spinner'
 
 function Statistic() {
-  const { articles } = useTripArticles()
-  const { categories } = useCategories()
+  const { articles, isLoading: isLoadingArticles } = useTripArticles()
+  const { categories, isLoading: isLoadingCategories } = useCategories()
 
   const totalArticles = articles?.totalItems
   const totalCategories = categories?.totalItems
+
+  if (isLoadingArticles && isLoadingCategories) return <Spinner />
 
   return (
     <div className="my-6">
