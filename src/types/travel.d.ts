@@ -1,10 +1,16 @@
+import type { Comment } from './comment'
+
 export interface TravelItem {
   id: number
   title: string
   documentId: string
   description: string
   cover_image_url: string
+  locale: string
+  comments: Comment[]
   createdAt: string
+  publishedAt: string
+  updatedAt: string
 }
 
 export interface ApiPagination {

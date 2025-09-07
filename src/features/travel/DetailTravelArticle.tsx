@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useArticleDetail } from '../../hooks/useArticleDetail'
 import Spinner from '../../ui/Spinner'
 import { formatDate } from '../../utils'
+import CommentArticle from './CommentArticle'
 
 function DetailTravelArticle() {
   const { detailId } = useParams<{ detailId: string }>()
@@ -31,9 +32,16 @@ function DetailTravelArticle() {
         {formatDate(article?.createdAt || '')}
       </p>
 
-      <div className="mt-6 text-lg leading-relaxed text-primary-200">
+      <div className="mt-6 text-lg text-justify leading-relaxed text-primary-200">
         {article?.description}
       </div>
+
+      {detailId && (
+        <CommentArticle
+          comments={article?.comments ?? []}
+          detailId={detailId}
+        />
+      )}
     </div>
   )
 }
