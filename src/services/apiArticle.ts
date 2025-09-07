@@ -72,7 +72,7 @@ export const deleteArticle = async (id: string, token: string) => {
   return json
 }
 
-export const getArticle = async (id: string, token: string) => {
+export const getArticleById = async (id: string, token: string) => {
   const res = await fetch(`${BASE_API}/articles/${id}`, {
     method: 'GET',
     headers: {

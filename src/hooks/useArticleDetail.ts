@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
-import { getArticle } from '../services/apiArticle'
 import { getToken } from '../features/auth/authSlice'
+import { getArticleById } from '../services/apiArticle'
 import type { TravelItem } from '../types/travel'
 
 export function useArticleDetail(id: string | undefined) {
@@ -14,7 +14,7 @@ export function useArticleDetail(id: string | undefined) {
     isFetched
   } = useQuery<TravelItem, Error>({
     queryKey: ['article', id],
-    queryFn: () => getArticle(id!, token!)
+    queryFn: () => getArticleById(id!, token!)
     // enabled: !!id && !!token
   })
 
