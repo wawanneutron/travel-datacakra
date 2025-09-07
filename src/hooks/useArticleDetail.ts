@@ -13,7 +13,7 @@ export function useArticleDetail(id: string | undefined) {
     error,
     isFetched
   } = useQuery<TravelItem, Error>({
-    queryKey: ['article', id],
+    queryKey: ['article-detail', id],
     queryFn: () => getArticleById(id!, token!),
     enabled: !!id && !!token
   })
