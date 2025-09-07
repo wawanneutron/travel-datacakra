@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import bg from '../../public/bg.png'
+import bg from '../../public/bg.webp'
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
         alt="bg-travel"
         loading="lazy"
         decoding="async"
-        className="absolute h-full w-full -mt-24 object-cover object-top"
+        className="absolute h-full w-full -mt-32 object-cover object-top"
       />
 
       <div className="flex flex-col items-center justify-center relative z-10 text-center h-[80vh]">
