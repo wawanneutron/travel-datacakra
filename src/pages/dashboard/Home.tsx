@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { getUser } from '../../features/auth/authSlice'
+import Statistic from '../../features/dashboard/Statistic'
 
 export default function DashboardHome() {
   const user = useSelector(getUser)
@@ -14,6 +15,8 @@ export default function DashboardHome() {
           to the dashboard! 👋
         </p>
       </div>
+
+      <Statistic />
     </div>
   )
 }
