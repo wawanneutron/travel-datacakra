@@ -15,6 +15,8 @@ function DetailTravelArticle() {
         <img
           src={article.cover_image_url}
           alt={article.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-80 object-cover rounded-lg shadow-md"
           onError={(e) =>
             ((e.currentTarget as HTMLImageElement).src = '/broken-image.png')

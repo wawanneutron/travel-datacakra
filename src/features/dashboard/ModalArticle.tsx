@@ -136,6 +136,8 @@ function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
               src={item?.cover_image_url}
               alt={item?.title}
               title={item?.title}
+              loading="lazy"
+              decoding="async"
             />
           )}
           <input

@@ -18,6 +18,7 @@ function CardTravel({ trip, detailTrip }: CardTravelProps) {
           title={trip.title}
           alt={trip.title}
           loading="lazy"
+          decoding="async"
           className="w-full h-48 object-cover rounded-lg mb-4"
           onError={(e) =>
             ((e.currentTarget as HTMLImageElement).src = '/broken-image.png')

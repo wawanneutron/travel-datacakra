@@ -7,6 +7,8 @@ export default function Home() {
       <img
         src={bg}
         alt="bg-travel"
+        loading="lazy"
+        decoding="async"
         className="absolute h-full w-full -mt-24 object-cover object-top"
       />
 
