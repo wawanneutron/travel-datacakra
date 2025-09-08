@@ -8,10 +8,8 @@ export default function Travel() {
           See all Article Travel
         </h1>
         <p className="text-gray-400 max-w-3xl italic">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni ipsum
-          minus optio provident, cumque molestias asperiores laudantium
-          voluptatem dolores cum numquam, nam unde aliquid eos velit inventore
-          animi id sunt?
+          From mountain adventures to seaside escapes, read articles that bring
+          you closer to the world’s most amazing places.
         </p>
       </div>
 
