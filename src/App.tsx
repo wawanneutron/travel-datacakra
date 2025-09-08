@@ -15,6 +15,7 @@ import AppLayoutDashboard from './ui/AppLayoutDashboard'
 import ProtectedRoute from './features/auth/ProtectedRoute'
 import Detail from './pages/Detail'
 import DashboardComment from './pages/dashboard/Comment'
+import PageNotFound from './pages/PageNotFound'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,7 +40,7 @@ function App() {
 
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="*" element={<div>Not Found</div>} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
 
           <Route
