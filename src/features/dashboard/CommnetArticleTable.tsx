@@ -13,13 +13,13 @@ function CommentArticleTable() {
   const { comments, isLoading } = useComments(page, 8)
 
   const [purpose, setPurpose] = useState<PurposeType>()
-  const [isModalArticle, setIsModalArticle] = useState<boolean>(false)
+  const [isModalEdit, setIsModalEdit] = useState<boolean>(false)
   const [isModalDelete, setIsModalDelete] = useState<boolean>(false)
   const [commentItem, setCommentItem] = useState<Comment>()
 
   const handleModalComment = (item?: Comment) => {
     setCommentItem(item)
-    setIsModalArticle(true)
+    setIsModalEdit(true)
   }
 
   const handleModalDelete = (item: Comment) => {
@@ -102,8 +102,8 @@ function CommentArticleTable() {
       <ModalComment
         purpose={purpose}
         item={commentItem}
-        isOpen={isModalArticle}
-        onCloseModal={() => setIsModalArticle(false)}
+        isOpen={isModalEdit}
+        onCloseModal={() => setIsModalEdit(false)}
       />
 
       <ModalDelete

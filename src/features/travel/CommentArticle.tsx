@@ -35,16 +35,22 @@ function CommentArticle({ comments, detailId }: CommentsProps) {
         Comments <span className="text-amber-500">{comments.length || ''}</span>
       </h2>
 
-      <ul className="space-y-4">
-        {comments.map((comment) => (
-          <CommentArticleList key={comment.id} comment={comment} />
-        ))}
-      </ul>
+      {comments.length ? (
+        <ul className="space-y-4">
+          {comments.map((comment) => (
+            <CommentArticleList key={comment.id} comment={comment} />
+          ))}
+        </ul>
+      ) : (
+        <p className="text-center italic text-primary-500">
+          Oops, no comments here. Drop yours below
+        </p>
+      )}
 
       <form onSubmit={handlePostComment} className="mt-6">
         <textarea
           name="content"
-          className="w-full h-24 input mb-2"
+          className="w-full h-24 input"
           placeholder="Write comment..."
         />
         <div className="flex justify-end">

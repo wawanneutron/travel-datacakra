@@ -1,17 +1,78 @@
+import { FaPen, FaTrash } from 'react-icons/fa6'
+import { useSelector } from 'react-redux'
 import type { Comment } from '../../types/comment'
 import { formatDate } from '../../utils'
+import { getUser } from '../auth/authSlice'
+import { useState } from 'react'
+import ModalDelete from '../dashboard/ModalDelete'
+import ModalComment from '../dashboard/ModalComment'
+import type { PurposeType } from '../../types/ui'
 
 function CommentArticleList({ comment }: { comment: Comment }) {
+  const user = useSelector(getUser)
+  const [purpose, setPurpose] = useState<PurposeType>()
+  const [isModalDelete, setIsModalDelete] = useState<boolean>(false)
+  const [isModalEdit, setIsModalEdit] = useState<boolean>(false)
+  const canDeleteComment = user?.documentId === comment?.user.documentId
+
+  const handleDelete = () => setIsModalDelete(true)
+
+  const handleEditComment = () => {
+    setPurpose('edit')
+    setIsModalEdit(true)
+  }
+
   return (
-    <li className="border border-primary-800 rounded-lg p-3 bg-primary-900">
-      <p className="text-lg text-primary-400 capitalize mb-2">
-        {comment.user.username}
-      </p>
-      <p className="text-primary-200">{comment.content}</p>
-      <span className="text-xs text-primary-400">
-        {formatDate(comment.createdAt)}
-      </span>
-    </li>
+    <>
+      <li className="border border-primary-800 rounded-lg p-3 bg-primary-900 flex justify-between items-start">
+        <div>
+          <p className="text-lg text-primary-400 capitalize mb-2">
+            {comment.user.username}
+          </p>
+          <div className="flex gap-4">
+            <p className="text-primary-200">{comment.content}</p>
+            {canDeleteComment && (
+              <button
+                onClick={handleEditComment}
+                className="text-accent-400 hover:text-accent-500"
+                title="Edit comment"
+              >
+                <FaPen className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+          <span className="text-xs text-primary-400">
+            {formatDate(comment.createdAt)}
+          </span>
+        </div>
+
+        {canDeleteComment && (
+          <div className="flex rounded-full w-10 h-10 bg-primary-800">
+            <button
+              onClick={handleDelete}
+              className="text-red-400 hover:text-red-300 ml-3"
+              title="Delete comment"
+            >
+              <FaTrash className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+      </li>
+
+      <ModalDelete
+        isOpen={isModalDelete}
+        TypeDelete="comment"
+        documentId={comment.documentId}
+        onCloseModal={() => setIsModalDelete(false)}
+      />
+
+      <ModalComment
+        purpose={purpose}
+        item={comment}
+        isOpen={isModalEdit}
+        onCloseModal={() => setIsModalEdit(false)}
+      />
+    </>
   )
 }
 
