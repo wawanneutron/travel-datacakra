@@ -56,11 +56,12 @@ yarn dev
 - **Travel articles CRUD** (Create, Read, Update, Delete)
 - **Category management** with modal selection
 - **Pagination** (with custom `Pagination` component)
-- **Image upload** via Strapi `/upload` endpoint (with preview + drag & drop support)
 - **Reusable hooks** (`useTripArticles`, `useSaveArticle`, `useDeleteArticle`, etc.)
 - **Responsive UI** styled with Tailwind CSS
+- **Image upload**
 - **List Card Article**
 - **Detail Article**
+- **Comment Article**
 
 ---
 
