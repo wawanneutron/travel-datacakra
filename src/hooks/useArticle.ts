@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 import { getToken } from '../features/auth/authSlice'
@@ -7,6 +7,7 @@ import type { ArticleFormPayload, TravelItem } from '../types/travel'
 
 export function useSaveArticle() {
   const token = useSelector(getToken)
+  const queryClient = useQueryClient()
 
   const { mutate: saveArticle, isPending } = useMutation<
     TravelItem,
@@ -22,6 +23,8 @@ export function useSaveArticle() {
     }) => createUpdateArticle(payload, token!, id),
 
     onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['tripArticles'] })
+
       toast.success(
         variables.id
           ? 'Article successfully updated'
