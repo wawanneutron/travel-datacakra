@@ -74,7 +74,7 @@ export const deleteArticle = async (id: string, token: string) => {
 
 export const getArticleById = async (id: string, token: string) => {
   const res = await fetch(
-    `${BASE_API}/articles/${id}/?populate[comments][populate][user]=*`,
+    `${BASE_API}/articles/${id}/?populate[comments][populate][user]=*&populate[user]=*&populate[category]=*`,
     {
       method: 'GET',
       headers: {
