@@ -1,4 +1,6 @@
 import type { ApiPagination } from '.'
+import type { User } from './auth'
+import type { CategoryItem } from './category'
 import type { Comment } from './comment'
 
 export interface TravelItem {
@@ -9,6 +11,8 @@ export interface TravelItem {
   cover_image_url: string
   locale: string
   comments: Comment[]
+  category: CategoryItem
+  user: User
   createdAt: string
   publishedAt: string
   updatedAt: string
