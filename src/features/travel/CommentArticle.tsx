@@ -6,9 +6,10 @@ import CommentArticleList from './CommentArticleList'
 
 interface CommentsProps {
   comments: Comment[]
+  detailId: string
 }
 
-function CommentArticle({ comments }: CommentsProps) {
+function CommentArticle({ comments, detailId }: CommentsProps) {
   const { saveComment, isLoading } = useSaveComments()
 
   const handlePostComment = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +22,8 @@ function CommentArticle({ comments }: CommentsProps) {
     if (!content) return
 
     const data: CommentInputPayload = {
-      content: formData.get('content') as string
+      content: formData.get('content') as string,
+      article: detailId
     }
 
     saveComment({ payload: data }, { onSuccess: () => form.reset() })

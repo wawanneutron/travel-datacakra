@@ -27,7 +27,7 @@ export interface Comment {
 
 export interface CommentInputPayload {
   content: string
-  // article: string
+  article?: string
 }
 
 export interface CommentResponse {

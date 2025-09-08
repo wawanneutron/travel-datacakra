@@ -36,7 +36,12 @@ function DetailTravelArticle() {
         {article?.description}
       </div>
 
-      {detailId && <CommentArticle comments={article?.comments ?? []} />}
+      {detailId && (
+        <CommentArticle
+          comments={article?.comments ?? []}
+          detailId={detailId}
+        />
+      )}
     </div>
   )
 }
