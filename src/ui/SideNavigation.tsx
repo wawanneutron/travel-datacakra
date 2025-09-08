@@ -1,8 +1,13 @@
 import { useState } from 'react'
-import { FaCaretSquareRight, FaHome, FaSignOutAlt } from 'react-icons/fa'
-import { FaHeartCircleCheck } from 'react-icons/fa6'
-import { Link, useLocation } from 'react-router-dom'
+import {
+  FaComments,
+  FaHome,
+  FaNewspaper,
+  FaSignOutAlt,
+  FaThList
+} from 'react-icons/fa'
 import { HiMenu, HiX } from 'react-icons/hi'
+import { Link, useLocation } from 'react-router-dom'
 import ModalLogout from '../features/auth/ModalLogout'
 import Logo from './Logo'
 
@@ -16,12 +21,17 @@ function SideNavigation() {
     {
       name: 'Article',
       href: '/dashboard/article',
-      icon: <FaHeartCircleCheck className="h-5 w-5 text-primary-600" />
+      icon: <FaNewspaper className="h-5 w-5 text-primary-600" />
     },
     {
       name: 'Category',
       href: '/dashboard/category',
-      icon: <FaCaretSquareRight className="h-5 w-5 text-primary-600" />
+      icon: <FaThList className="h-5 w-5 text-primary-600" />
+    },
+    {
+      name: 'Comments',
+      href: '/dashboard/comment',
+      icon: <FaComments className="h-5 w-5 text-primary-600" />
     }
   ]
   const location = useLocation()
@@ -41,7 +51,7 @@ function SideNavigation() {
   return (
     <>
       <nav className="hidden md:block border-r border-primary-900">
-        <div className="my-8 px-4">
+        <div className="my-8">
           <Logo />
         </div>
         <ul className="flex flex-col gap-2 text-lg">

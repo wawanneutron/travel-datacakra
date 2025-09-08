@@ -18,3 +18,10 @@ export interface UploadResponse {
   createdAt: string
   updatedAt: string
 }
+
+export interface ApiPagination {
+  page: number
+  pageSize: number
+  pageCount: number
+  total: number
+}

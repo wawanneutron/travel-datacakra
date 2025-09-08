@@ -2,9 +2,10 @@ import type { IconType } from 'react-icons/lib'
 import type { ChildrenProps } from '.'
 import type { CategoryItem } from './category'
 import type { TravelItem } from './travel'
+import type { Comment } from './comment'
 
 type PurposeType = 'create' | 'edit'
-type TypeDelete = 'category' | 'article'
+type TypeDelete = 'category' | 'article' | 'comment'
 
 export interface ButtonProps extends ChildrenProps {
   disabled?: boolean
@@ -31,6 +32,13 @@ export interface ModalCategoryProps {
   isOpen: boolean
   purpose?: PurposeType
   item?: CategoryItem
+  onCloseModal: () => void
+}
+
+export interface ModalCommentProps {
+  isOpen: boolean
+  purpose?: PurposeType
+  item?: Comment
   onCloseModal: () => void
 }
 

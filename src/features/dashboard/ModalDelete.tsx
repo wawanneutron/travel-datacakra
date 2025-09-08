@@ -1,3 +1,4 @@
+import { useDeleteComment } from '../../hooks/useComment'
 import { useDeleteArticle } from '../../hooks/useDeleteArticle'
 import { useDeleteCategory } from '../../hooks/useDeleteCategory'
 import type { ModalDeleteProps } from '../../types/ui'
@@ -12,8 +13,9 @@ function ModalDelete({
 }: ModalDeleteProps) {
   const { removeArticle, isDeleArticle } = useDeleteArticle()
   const { removeCategory, isDeletCategory } = useDeleteCategory()
+  const { removeComment, isLoading: isDeleteComment } = useDeleteComment()
 
-  const isLoading = isDeleArticle || isDeletCategory
+  const isLoading = isDeleArticle || isDeletCategory || isDeleteComment
 
   const handleDelete = () => {
     if (!documentId) return
@@ -26,6 +28,12 @@ function ModalDelete({
 
     if (TypeDelete === 'category') {
       removeCategory(documentId, {
+        onSuccess: () => onCloseModal()
+      })
+    }
+
+    if (TypeDelete === 'comment') {
+      removeComment(documentId, {
         onSuccess: () => onCloseModal()
       })
     }
@@ -49,7 +57,7 @@ function ModalDelete({
             className="flex justify-between items-center gap-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
             disabled={isLoading}
           >
-            <span>Delete</span>
+            {isLoading ? 'Loading...' : 'Delete'}
             {isLoading && <SpinnerMini />}
           </button>
         </div>

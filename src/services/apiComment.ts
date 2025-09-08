@@ -1,4 +1,9 @@
-import type { CommentInputPayload } from '../types/comment'
+import type { PaginatedResult } from '../types'
+import type {
+  Comment,
+  CommentInputPayload,
+  CommentResponse
+} from '../types/comment'
 
 const BASE_API = import.meta.env.VITE_API_URL
 
@@ -29,6 +34,33 @@ export const createUpdateComment = async (
   return json
 }
 
+export const getCommentArticle = async (
+  page = 1,
+  pageSize = 8,
+  token: string
+): Promise<PaginatedResult<Comment>> => {
+  const res = await fetch(
+    `${BASE_API}/comments?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate[user]=*`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }
+  )
+  if (!res.ok) throw new Error('Failed to fetch comments')
+
+  const { data, meta }: CommentResponse = await res.json()
+
+  return {
+    items: data,
+    page: meta.pagination.page,
+    totalPages: meta.pagination.pageCount,
+    totalItems: meta.pagination.total
+  }
+}
+
 export const getCommentById = async (id: string, token: string) => {
   const res = await fetch(`${BASE_API}/comments/${id}`, {
     method: 'GET',
@@ -43,4 +75,22 @@ export const getCommentById = async (id: string, token: string) => {
   }
 
   return res.json()
+}
+
+export const deleteComment = async (id: string, token: string) => {
+  const res = await fetch(`${BASE_API}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  const text = await res.text()
+  const json = text ? JSON.parse(text) : null
+
+  if (!res.ok) {
+    throw new Error(json?.error?.message || 'Failed to delete comment')
+  }
+
+  return json
 }

@@ -1,24 +1,34 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 import { getToken } from '../features/auth/authSlice'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { createUpdateComment, getCommentById } from '../services/apiComment'
+import {
+  createUpdateComment,
+  deleteComment,
+  getCommentArticle
+} from '../services/apiComment'
+import type { PaginatedResult } from '../types'
 import type { Comment, CommentInputPayload } from '../types/comment'
-import toast from 'react-hot-toast'
 
-export function useCommentArticle(id?: string) {
+export function useComments(page?: number, pageSize = 8) {
   const token = useSelector(getToken)
 
   const {
-    data: commentArticle,
-    isLoading,
+    data: comments,
+    isPending: isLoading,
+    isFetched,
     error
-  } = useQuery({
-    queryKey: ['comment-article', id],
-    queryFn: () => getCommentById(id!, token!),
-    enabled: !!id && !!token
+  } = useQuery<PaginatedResult<Comment>>({
+    queryKey: ['comments', page],
+    queryFn: () => getCommentArticle(page, pageSize, token!)
   })
 
-  return { commentArticle, isLoading, error }
+  return {
+    comments,
+    isLoading,
+    isFetched,
+    error
+  }
 }
 
 export function useSaveComments() {
@@ -43,6 +53,7 @@ export function useSaveComments() {
 
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['article-detail'] })
+      queryClient.invalidateQueries({ queryKey: ['comments'] })
 
       toast.success(
         variables.id
@@ -54,4 +65,24 @@ export function useSaveComments() {
   })
 
   return { saveComment, isLoading }
+}
+
+export function useDeleteComment() {
+  const token = useSelector(getToken)
+  const queryClient = useQueryClient()
+
+  const { mutate: removeComment, isPending: isLoading } = useMutation({
+    mutationFn: (id: string) => deleteComment(id, token!),
+    onSuccess: () => {
+      toast.success('Comment Article deleted successfully')
+
+      queryClient.invalidateQueries({ queryKey: ['article-detail'] })
+      queryClient.invalidateQueries({ queryKey: ['comments'] })
+    },
+    onError: (err: Error) => {
+      toast.error(err.message || 'Failed to delete article')
+    }
+  })
+
+  return { removeComment, isLoading }
 }

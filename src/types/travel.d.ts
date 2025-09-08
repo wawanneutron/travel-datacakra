@@ -1,3 +1,4 @@
+import type { ApiPagination } from '.'
 import type { Comment } from './comment'
 
 export interface TravelItem {
@@ -11,13 +12,6 @@ export interface TravelItem {
   createdAt: string
   publishedAt: string
   updatedAt: string
-}
-
-export interface ApiPagination {
-  page: number
-  pageSize: number
-  pageCount: number
-  total: number
 }
 
 export interface TravelResponse {

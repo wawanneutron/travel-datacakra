@@ -1,3 +1,5 @@
+import type { ApiPagination } from './travel'
+
 export interface User {
   id: number
   documentId: string
@@ -25,5 +27,12 @@ export interface Comment {
 
 export interface CommentInputPayload {
   content: string
-  article: string
+  // article: string
+}
+
+export interface CommentResponse {
+  data: Comment[]
+  meta: {
+    pagination: ApiPagination
+  }
 }

@@ -14,6 +14,7 @@ import AppLayout from './ui/AppLayout'
 import AppLayoutDashboard from './ui/AppLayoutDashboard'
 import ProtectedRoute from './features/auth/ProtectedRoute'
 import Detail from './pages/Detail'
+import DashboardComment from './pages/dashboard/Comment'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,6 +52,7 @@ function App() {
             <Route path="dashboard" element={<DashboardHome />} />
             <Route path="dashboard/article" element={<DashboardArticle />} />
             <Route path="dashboard/category" element={<DashboardCategory />} />
+            <Route path="dashboard/comment" element={<DashboardComment />} />
           </Route>
         </Routes>
       </BrowserRouter>
