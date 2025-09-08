@@ -5,7 +5,6 @@ import SideNavigation from './SideNavigation'
 function AppLayoutDashboard() {
   return (
     <div className="flex bg-primary-950 text-primary-100 min-h-screen">
-      {/* Sidebar Desktop */}
       <div className="hidden md:block w-64 border-r border-primary-900">
         <SideNavigation />
       </div>
@@ -14,10 +13,11 @@ function AppLayoutDashboard() {
         <div className="px-4 py-2">
           <Header />
         </div>
-        <Outlet />
+        <div className="pb-12">
+          <Outlet />
+        </div>
       </main>
 
-      {/* Sidebar Mobile */}
       <div className="md:hidden">
         <SideNavigation />
       </div>
