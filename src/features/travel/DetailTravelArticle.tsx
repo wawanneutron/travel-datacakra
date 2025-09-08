@@ -11,7 +11,7 @@ function DetailTravelArticle() {
   if (isLoading) return <Spinner />
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
+    <div className="max-w-4xl mx-auto py-8">
       {article?.cover_image_url && (
         <img
           src={article.cover_image_url}
@@ -25,11 +25,11 @@ function DetailTravelArticle() {
         />
       )}
 
-      <h1 className="mt-6 text-4xl font-bold text-primary-100">
+      <h1 className="mt-6 text-2xl sm:text-4xl font-bold text-primary-100">
         {article?.title}
       </h1>
       <p className="text-sm text-primary-400 mt-2">
-        {formatDate(article?.createdAt || '')}
+        publish: {formatDate(article?.publishedAt || '')}
       </p>
 
       <div className="mt-6 text-lg text-justify leading-relaxed text-primary-200">

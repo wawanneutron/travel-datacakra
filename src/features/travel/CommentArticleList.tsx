@@ -24,35 +24,33 @@ function CommentArticleList({ comment }: { comment: Comment }) {
 
   return (
     <>
-      <li className="border border-primary-800 rounded-lg p-3 bg-primary-900 flex justify-between items-start gap-8">
-        <div className="max-w-[90%]">
-          <p className="text-lg text-primary-400 capitalize mb-2">
-            {comment.user.username}
-          </p>
+      <li className="relative border border-primary-800 rounded-lg p-3 bg-primary-900 ">
+        <p className="text-lg text-primary-400 capitalize mb-2">
+          {comment.user.username}
+        </p>
 
-          <p className="text-primary-200">
-            {comment.content}
+        <p className="text-primary-200">
+          {comment.content}
 
-            {canDeleteComment && (
-              <button
-                onClick={handleEditComment}
-                className="text-accent-400 hover:text-accent-500 ml-2"
-                title="Edit comment"
-              >
-                <FaPen className="h-4 w-4" />
-              </button>
-            )}
-          </p>
+          {canDeleteComment && (
+            <button
+              onClick={handleEditComment}
+              className="text-accent-400 hover:text-accent-500 ml-2"
+              title="Edit comment"
+            >
+              <FaPen className="h-4 w-4" />
+            </button>
+          )}
+        </p>
 
-          <span className="text-xs text-primary-400">
-            {formatDate(comment.createdAt)}
-          </span>
-        </div>
+        <span className="text-xs text-primary-400">
+          {formatDate(comment.createdAt)}
+        </span>
 
         {canDeleteComment && (
           <div
             onClick={handleDelete}
-            className="flex items-center cursor-pointer rounded-full w-10 h-10 bg-primary-800"
+            className="absolute top-2 right-2 flex items-center cursor-pointer rounded-full w-10 h-10 bg-primary-800"
           >
             <button
               className="text-red-400 hover:text-red-300 ml-3"

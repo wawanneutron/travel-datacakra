@@ -94,11 +94,11 @@ function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
           <label htmlFor="description" className="font-medium block">
             Description
           </label>
-          <input
+          <textarea
             defaultValue={item?.description}
             name="description"
-            type="text"
-            className="input w-full"
+            className="w-full h-24 input"
+            placeholder="Write content"
           />
         </div>
 
