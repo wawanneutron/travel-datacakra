@@ -10,20 +10,22 @@ export default function Modal({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="px-4 fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div
         className={`bg-primary-900 rounded-lg shadow-lg w-full p-6 relative ${width}`}
       >
         <button
           onClick={onClose}
-          className="absolute text-2xl top-3 right-3 text-primary-300 hover:text-primary-100"
+          className="absolute text-2xl top-3 right-6 text-primary-300 hover:text-primary-100"
         >
           ✕
         </button>
 
         {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
 
-        <div>{children}</div>
+        <div className="max-h-[70vh] sm:max-h-svh overflow-y-auto">
+          {children}
+        </div>
       </div>
     </div>
   )

@@ -91,11 +91,11 @@ function SideNavigation() {
         </button>
 
         <div
-          className={`fixed top-0 left-0 h-full w-64 bg-primary-950 shadow-lg transform transition-transform duration-300 z-40 ${
+          className={`pt-8 fixed top-0 left-0 h-full w-64 bg-primary-950 shadow-lg transform transition-transform duration-300 z-40 ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
-          <div className="my-8 px-4">
+          <div className="my-8">
             <Logo />
           </div>
           <ul className="flex flex-col gap-2 text-lg">
