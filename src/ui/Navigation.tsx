@@ -75,6 +75,8 @@ function Navigation() {
               <img
                 src="https://i.pravatar.cc/300"
                 alt="avatar"
+                loading="lazy"
+                decoding="async"
                 className="w-10 h-10 rounded-full"
               />
             </Link>
