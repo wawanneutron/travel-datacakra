@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import { useSaveArticle } from '../../hooks/useArticle'
 import { uploadImage } from '../../services/apiUpload'
 import type { CategoryItem } from '../../types/category'
+import type { ArticleFormPayload } from '../../types/travel'
 import type { ModalProps } from '../../types/ui'
 import Button from '../../ui/Button'
 import Modal from '../../ui/Modal'
 import SpinnerMini from '../../ui/SpinnerMini'
 import { getToken } from '../auth/authSlice'
 import ModalCategoryTable from './ModalCategoryTable'
-import type { ArticleFormPayload } from '../../types/travel'
 
 function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
   const token = useSelector(getToken)
@@ -26,7 +26,14 @@ function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
     setValue,
     reset,
     formState: { errors }
-  } = useForm<ArticleFormPayload>()
+  } = useForm<ArticleFormPayload>({
+    values: {
+      title: item?.title ?? '',
+      description: item?.description ?? '',
+      category: item?.category?.documentId ?? '',
+      cover_image_url: item?.cover_image_url ?? ''
+    }
+  })
 
   const onSubmit: SubmitHandler<ArticleFormPayload> = async (data) => {
     let imageUrl = item?.cover_image_url || ''
@@ -63,27 +70,6 @@ function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
       }
     )
   }
-
-  useEffect(() => {
-    if (purpose === 'edit' && item) {
-      reset({
-        title: item.title || '',
-        description: item.description || '',
-        category: item.documentId || ''
-      })
-      setCategoryItem(undefined)
-    }
-
-    if (purpose === 'create') {
-      reset({
-        title: '',
-        description: '',
-        category: '',
-        cover_image_url: undefined
-      })
-      setCategoryItem(undefined)
-    }
-  }, [purpose, item, reset])
 
   const handleOpenModal = () => setIsModalOpen(true)
 
@@ -123,7 +109,8 @@ function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
           <input
             defaultValue={item?.title}
             type="text"
-            className="input w-full"
+            className="input w-full placeholder:text-accent-300"
+            placeholder="Write Title"
             {...register('title', { required: 'Title is required' })}
           />
           {errors.title && (
@@ -137,7 +124,7 @@ function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
           </label>
           <textarea
             defaultValue={item?.description}
-            className="w-full h-24 input"
+            className="w-full h-24 input placeholder:text-accent-300"
             placeholder="Write content"
             {...register('description', {
               required: 'Description is required'
@@ -155,7 +142,8 @@ function ModalArticle({ isOpen, onCloseModal, item, purpose }: ModalProps) {
           <div className="grid grid-cols-[1fr_auto] gap-4">
             <input
               type="text"
-              className="input w-full"
+              className="input w-full placeholder:text-accent-300"
+              placeholder="Choose category"
               defaultValue={isCategoryItem?.documentId}
               {...register('category', { required: 'Category is required' })}
             />
