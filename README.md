@@ -1,6 +1,6 @@
 # ✈️ Travel Articles
 
-A modern travel article management web app built with **React (Vite)**, **Tailwind CSS**, **Redux Toolkit**, and **@tanstack/react-query**, connected to a **Strapi API**.  
+A modern travel article management web app built with **React (Vite)**, **Tailwind CSS**, **Redux Toolkit**, and **@tanstack/react-query**, connected to a **API**.  
 This app allows users to **register & login**, manage **travel articles & categories**, and explore data with **pagination, modals, and image uploads**.
 
 ---
