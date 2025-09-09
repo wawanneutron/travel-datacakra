@@ -54,6 +54,7 @@ function ArticleTravelTable() {
               <th className="px-4 py-3 border border-primary-700">
                 Description
               </th>
+              <th className="px-4 py-3 border border-primary-700">Category</th>
               <th className="px-4 py-3 border border-primary-700">
                 Created At
               </th>
@@ -74,6 +75,9 @@ function ArticleTravelTable() {
                 </td>
                 <td className="px-4 py-3 border border-primary-700 max-w-[250px] truncate">
                   {travel.description}
+                </td>
+                <td className="px-4 py-3 border border-primary-700 max-w-[250px] truncate">
+                  {travel.category?.name ?? '-'}
                 </td>
                 <td className="px-4 py-3 border border-primary-700">
                   {new Date(travel.createdAt).toLocaleDateString()}

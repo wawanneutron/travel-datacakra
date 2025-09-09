@@ -12,7 +12,7 @@ export const getTripArticles = async (
   pageSize = 8
 ): Promise<PaginatedResult<TravelItem>> => {
   const res = await fetch(
-    `${BASE_API}/articles?pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+    `${BASE_API}/articles?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate[category]=*`,
     { method: 'GET' }
   )
   if (!res.ok) throw new Error('Failed to fetch trip articles')
