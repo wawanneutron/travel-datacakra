@@ -1,5 +1,6 @@
-import { format } from 'date-fns'
+import { FaClock } from 'react-icons/fa6'
 import type { TravelItem } from '../../types/travel'
+import { formatDate } from '../../utils'
 
 interface CardTravelProps {
   trip: TravelItem
@@ -24,11 +25,16 @@ function CardTravel({ trip, detailTrip }: CardTravelProps) {
             ((e.currentTarget as HTMLImageElement).src = '/broken-image.png')
           }
         />
-        <h2> {trip.title} </h2>
-        <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+        <h2 className="text-muted-foreground line-clamp-2 mb-2">
+          {trip.title}
+        </h2>
+        <p className="text-sm text-primary-400 text-muted-foreground line-clamp-2 mt-1">
           {trip.description}
         </p>
-        <p>{format(new Date(trip.createdAt), 'dd MMM YYY')} </p>
+        <p className="flex items-center gap-2 text-sm text-primary-500 mt-2">
+          <FaClock />
+          {formatDate(trip?.publishedAt || '')}
+        </p>
       </div>
     </div>
   )

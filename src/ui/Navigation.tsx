@@ -30,7 +30,7 @@ function Navigation() {
           <Link
             to="/travel-list"
             className={
-              location.pathname === '/travel-list'
+              location.pathname.startsWith('/travel-list')
                 ? 'text-accent-400 transition-colors'
                 : 'text-primary-100'
             }

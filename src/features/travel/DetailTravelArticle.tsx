@@ -42,7 +42,7 @@ function DetailTravelArticle() {
             decoding="async"
             className="w-8 h-8 rounded-full"
           />
-          <p className="flex items-center gap-1 text-sm text-primary-400">
+          <p className="flex items-center gap-1 text-sm text-primary-400 capitalize">
             <FaUser />
             {article?.user.username}
           </p>
@@ -56,7 +56,7 @@ function DetailTravelArticle() {
         </p>
       </div>
 
-      <div className="mt-6 text-lg text-justify leading-relaxed text-primary-200">
+      <div className="mt-6 text-lg text-justify leading-relaxed text-primary-300">
         {article?.description}
       </div>
 
