@@ -2,34 +2,59 @@ import { Link } from 'react-router-dom'
 import { useLogin } from '../../hooks/useLogin'
 import Button from '../../ui/Button'
 import SpinnerMini from '../../ui/SpinnerMini'
+import { useForm, type SubmitHandler } from 'react-hook-form'
+import type { LoginPayload } from '../../types/auth'
 
 function FormLogin() {
   const { authLogin, isLoading } = useLogin()
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginPayload>()
 
-    authLogin({
-      identifier: formData.get('identifier') as string,
-      password: formData.get('password') as string
-    })
+  const onSubmit: SubmitHandler<LoginPayload> = (data) => {
+    const payload: LoginPayload = {
+      identifier: data.identifier.trim(),
+      password: data.password.trim()
+    }
+
+    authLogin(payload)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-2 space-y-1">
         <label htmlFor="identifier" className="font-medium block">
           Username
         </label>
-        <input name="identifier" type="text" className="input w-96" />
+
+        <input
+          type="text"
+          className="input w-full"
+          {...register('identifier', { required: 'Username is required' })}
+        />
+
+        {errors.identifier && (
+          <p className="text-red-500 text-sm">{errors.identifier.message}</p>
+        )}
       </div>
 
       <div className="space-y-1">
         <label htmlFor="password" className="font-medium block">
           Password
         </label>
-        <input name="password" type="password" className="input w-96" />
+
+        <input
+          type="password"
+          className="input w-full"
+          {...register('password', { required: 'Password is required' })}
+        />
+
+        {errors.password && (
+          <p className="text-red-500 text-sm">{errors.password.message}</p>
+        )}
       </div>
 
       <Button disabled={isLoading}>

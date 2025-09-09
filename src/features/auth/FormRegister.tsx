@@ -1,44 +1,77 @@
-import type React from 'react'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { useRegister } from '../../hooks/useRegister'
-import SpinnerMini from '../../ui/SpinnerMini'
+import type { RegisterPayload } from '../../types/auth'
 import Button from '../../ui/Button'
+import SpinnerMini from '../../ui/SpinnerMini'
 
 function FormRegister() {
   const { createAccount, isLoading } = useRegister()
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<RegisterPayload>()
 
-    createAccount({
-      username: formData.get('username') as string,
-      email: formData.get('email') as string,
-      password: formData.get('password') as string
-    })
+  const onSubmit: SubmitHandler<RegisterPayload> = (data) => {
+    const payload: RegisterPayload = {
+      username: data.username.trim(),
+      email: data.email.trim(),
+      password: data.password.trim()
+    }
+
+    createAccount(payload)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-2 space-y-1">
         <label htmlFor="username" className="font-medium block">
           Username
         </label>
-        <input name="username" type="text" className="input w-96" />
+
+        <input
+          type="text"
+          className="input w-full"
+          {...register('username', { required: 'Username is required' })}
+        />
+
+        {errors.username && (
+          <p className="text-red-500 text-sm">{errors.username.message}</p>
+        )}
       </div>
 
       <div className="mb-2 space-y-1">
         <label htmlFor="email" className="font-medium block">
           Email
         </label>
-        <input name="email" type="email" className="input w-96" />
+
+        <input
+          type="email"
+          className="input w-full"
+          {...register('email', { required: 'Email is required' })}
+        />
+
+        {errors.email && (
+          <p className="text-red-500 text-sm">{errors.email.message}</p>
+        )}
       </div>
 
       <div className="space-y-1">
         <label htmlFor="password" className="font-medium block">
           Password
         </label>
-        <input name="password" type="password" className="input w-96" />
+
+        <input
+          type="password"
+          className="input w-full"
+          {...register('password', { required: 'Password is required' })}
+        />
+
+        {errors.password && (
+          <p className="text-red-500 text-sm">{errors.password.message}</p>
+        )}
       </div>
 
       <Button disabled={isLoading}>

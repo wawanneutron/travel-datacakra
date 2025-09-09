@@ -12,7 +12,7 @@ export default function Login() {
 
   return (
     <section className="h-[80vh] m-auto flex flex-col items-center justify-center">
-      <div className="bg-primary-900 p-10">
+      <div className="bg-primary-900 w-full max-w-md rounded-lg shadow-lg px-6 pb-6">
         <div className="flex flex-col items-center gap-2 mb-4 border-b py-4 border-primary-800">
           <Logo label={false} />
           <h3 className="font-mono text-3xl">Sign Up</h3>

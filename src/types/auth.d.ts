@@ -1,5 +1,3 @@
-export type RegisterPayload = Register
-
 interface AuthState {
   user: User | null
   token: string | null
