@@ -29,5 +29,5 @@ export interface ArticleFormPayload {
   title: string
   description: string
   category: string
-  cover_image_url: string
+  cover_image_url: string | FileList
 }
