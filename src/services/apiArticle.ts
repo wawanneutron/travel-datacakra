@@ -1,4 +1,5 @@
 import type { PaginatedResult } from '../types'
+import type { ErrorResponse } from '../types'
 import type {
   ArticleFormPayload,
   TravelItem,
@@ -9,15 +10,37 @@ const BASE_API = import.meta.env.VITE_API_URL
 
 export const getTripArticles = async (
   page = 1,
-  pageSize = 8
+  pageSize = 8,
+  token?: string
 ): Promise<PaginatedResult<TravelItem>> => {
+  const headers: HeadersInit = {}
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`
+  }
+
   const res = await fetch(
     `${BASE_API}/articles?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate[category]=*`,
-    { method: 'GET' }
+    {
+      method: 'GET',
+      headers
+    }
   )
-  if (!res.ok) throw new Error('Failed to fetch trip articles')
 
-  const { data, meta }: TravelResponse = await res.json()
+  const text = await res.text()
+  const json: TravelResponse & { error?: ErrorResponse } = text
+    ? JSON.parse(text)
+    : null
+
+  const { data, meta, error } = json
+
+  if (!res.ok) {
+    throw {
+      cause: error?.status ?? res.status,
+      name: error?.name ?? 'ApiError',
+      message: error?.message ?? 'Failed to fetch articles'
+    } as Error
+  }
 
   return {
     items: data,

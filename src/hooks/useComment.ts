@@ -20,7 +20,8 @@ export function useComments(page?: number, pageSize = 8) {
     error
   } = useQuery<PaginatedResult<Comment>>({
     queryKey: ['comments', page],
-    queryFn: () => getCommentArticle(page, pageSize, token!)
+    queryFn: () => getCommentArticle(page, pageSize, token!),
+    throwOnError: true
   })
 
   return {

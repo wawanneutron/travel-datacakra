@@ -25,3 +25,10 @@ export interface ApiPagination {
   pageCount: number
   total: number
 }
+
+export interface ErrorResponse {
+  status: number
+  name: string
+  message: string
+  details: Record<string, unknown>
+}

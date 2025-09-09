@@ -4,14 +4,12 @@ import { useArticleDetail } from '../../hooks/useArticleDetail'
 import Spinner from '../../ui/Spinner'
 import { formatDate } from '../../utils'
 import CommentArticle from './CommentArticle'
-import PageNotFound from '../../pages/PageNotFound'
 
 function DetailTravelArticle() {
   const { detailId } = useParams<{ detailId: string }>()
   const { article, isLoading } = useArticleDetail(detailId)
 
   if (isLoading) return <Spinner />
-  if (!article) return <PageNotFound />
 
   return (
     <div className="max-w-4xl mx-auto py-8">

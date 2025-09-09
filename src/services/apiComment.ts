@@ -1,4 +1,4 @@
-import type { PaginatedResult } from '../types'
+import type { ErrorResponse, PaginatedResult } from '../types'
 import type {
   Comment,
   CommentInputPayload,
@@ -49,9 +49,21 @@ export const getCommentArticle = async (
       }
     }
   )
-  if (!res.ok) throw new Error('Failed to fetch comments')
 
-  const { data, meta }: CommentResponse = await res.json()
+  const text = await res.text()
+  const json: CommentResponse & { error?: ErrorResponse } = text
+    ? JSON.parse(text)
+    : null
+
+  const { data, meta, error } = json
+
+  if (!res.ok) {
+    throw {
+      cause: error?.status ?? res.status,
+      name: error?.name ?? 'ApiError',
+      message: error?.message ?? 'Failed to fetch comments'
+    } as Error
+  }
 
   return {
     items: data,
