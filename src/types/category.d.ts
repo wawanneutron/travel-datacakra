@@ -18,4 +18,5 @@ export interface CategoryResponse {
 
 export interface CategoryFormPayload {
   name: string
+  description: string
 }

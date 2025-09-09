@@ -1,8 +1,10 @@
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useSaveCategory } from '../../hooks/useCategory'
 import type { ModalCategoryProps } from '../../types/ui'
 import Button from '../../ui/Button'
 import Modal from '../../ui/Modal'
 import SpinnerMini from '../../ui/SpinnerMini'
+import type { CategoryFormPayload } from '../../types/category'
 
 function ModalCategory({
   isOpen,
@@ -11,21 +13,25 @@ function ModalCategory({
   purpose
 }: ModalCategoryProps) {
   const { saveCategory, isLoading } = useSaveCategory()
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
 
-    const formData = new FormData(e.currentTarget)
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<CategoryFormPayload>({
+    values: item
+  })
 
-    const data = {
-      name: formData.get('name') as string,
-      description: formData.get('description') as string
+  const onSubmit: SubmitHandler<CategoryFormPayload> = async (data) => {
+    const payload: CategoryFormPayload = {
+      name: data.name,
+      description: data.description
     }
-
-    console.log(data)
 
     saveCategory(
       {
-        payload: data,
+        payload: payload,
         id: item?.documentId
       },
       {
@@ -34,23 +40,35 @@ function ModalCategory({
     )
   }
 
+  const handleCloseModal = () => {
+    onCloseModal()
+    reset({
+      name: '',
+      description: ''
+    })
+  }
+
   return (
-    <Modal isOpen={isOpen} onClose={onCloseModal}>
+    <Modal isOpen={isOpen} onClose={handleCloseModal}>
       <h2 className="text-lg font-semibold mb-4 border-b border-primary-800 pb-2">
         {purpose === 'create' ? 'Add New' : 'Edit'} Category
       </h2>
 
-      <form onSubmit={handleSubmit} className="py-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="p-1">
         <div className="mb-2 space-y-1">
           <label htmlFor="name" className="font-medium block">
             Name
           </label>
           <input
             defaultValue={item?.name}
-            name="name"
             type="text"
-            className="input w-full"
+            className="input w-full placeholder:text-accent-300"
+            placeholder="Write name"
+            {...register('name', { required: 'Name is required' })}
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
         </div>
 
         <div className="mb-2 space-y-1">
@@ -59,10 +77,15 @@ function ModalCategory({
           </label>
           <textarea
             defaultValue={item?.description}
-            name="description"
-            className="w-full h-24 input"
-            placeholder="Write content"
+            className="w-full h-24 input placeholder:text-accent-300"
+            placeholder="Write description"
+            {...register('description', {
+              required: 'Description is required'
+            })}
           />
+          {errors.description && (
+            <p className="text-red-500 text-sm">{errors.description.message}</p>
+          )}
         </div>
 
         <Button disabled={isLoading}>
